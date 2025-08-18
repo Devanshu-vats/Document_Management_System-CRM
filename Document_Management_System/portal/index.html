@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Submission Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
+    
+    <div id="success-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-60 hidden items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-white rounded-2xl p-8 text-center shadow-xl transform transition-transform duration-300 scale-95 opacity-0" id="success-box">
+            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full mx-auto flex items-center justify-center mb-4"><i class="fas fa-check text-3xl"></i></div>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Submission Successful!</h2>
+            <p class="text-gray-600">Your documents have been submitted. The page will now reload.</p>
+        </div>
+    </div>
+    
+    <div class="w-full max-w-2xl p-8 form-container rounded-2xl shadow-xl fade-in">
+        <div class="text-center mb-8"><div class="inline-flex items-center justify-center w-16 h-16 bg-blue-500 text-white rounded-full mb-4"><i class="fas fa-file-upload text-2xl"></i></div><h1 class="text-3xl font-bold text-blue-600 mb-2">Document Submission Portal</h1><p class="text-gray-600">Please fill in all required information and upload necessary documents</p></div>
+        <form id="submission-form" class="space-y-8" novalidate>
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-blue-100">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center"><i class="fas fa-user text-blue-500 mr-2"></i>Personal Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div><label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name</label><input type="text" id="first_name" name="first_name" required class="w-full border-2 border-gray-200 rounded-lg p-3 input-transition" placeholder="Jane"><div class="error-message" id="first_name-error"></div></div>
+                    <div><label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">Last Name</label><input type="text" id="last_name" name="last_name" required class="w-full border-2 border-gray-200 rounded-lg p-3 input-transition" placeholder="Cooper"><div class="error-message" id="last_name-error"></div></div>
+                    <div><label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label><input type="email" id="email" name="email" required class="w-full border-2 border-gray-200 rounded-lg p-3 input-transition" placeholder="jane@example.com"><div class="error-message" id="email-error"></div></div>
+                    <div><label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label><input type="tel" id="phone" name="phone" required class="w-full border-2 border-gray-200 rounded-lg p-3 input-transition" placeholder="+91 98765 43210"><div class="error-message" id="phone-error"></div></div>
+                    <div class="md:col-span-2">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Gender</label><input type="hidden" name="gender" id="gender-value" required>
+                        <div class="custom-dropdown" id="gender-dropdown"><div class="custom-dropdown-trigger w-full border-2 border-gray-200 rounded-lg p-3 bg-white flex justify-between items-center"><span id="gender-selected-text" class="text-gray-500">Select Gender</span><i class="fas fa-chevron-down text-gray-400 transition-transform"></i></div><div class="custom-dropdown-options"><div class="custom-dropdown-option" data-value="female">Female</div><div class="custom-dropdown-option" data-value="male">Male</div><div class="custom-dropdown-option" data-value="other">Other</div></div></div>
+                        <div class="error-message" id="gender-value-error"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-blue-100">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center"><i class="fas fa-folder-open text-blue-500 mr-2"></i>Required Documents</h2>
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-4">Choose your upload preference:</label>
+                    <div class="flex gap-4 mb-6">
+                        <label class="flex-1 cursor-pointer"><input type="radio" class="radio-custom w-4 h-4" name="upload_type" value="separate" required><div class="ml-2 p-4 border-2 border-gray-200 rounded-lg hover:border-blue-300 transition-colors"><div class="flex items-center mb-2"><i class="fas fa-files text-blue-500 mr-2"></i><span class="font-medium text-gray-700">Upload 5 Separate Documents</span></div><p class="text-gray-600 text-sm">Upload each document individually</p></div></label>
+                        <label class="flex-1 cursor-pointer"><input type="radio" class="radio-custom w-4 h-4" name="upload_type" value="combined"><div class="ml-2 p-4 border-2 border-gray-200 rounded-lg hover:border-blue-300 transition-colors"><div class="flex items-center mb-2"><i class="fas fa-file-pdf text-blue-500 mr-2"></i><span class="font-medium text-gray-700">Upload 1 Combined PDF</span></div><p class="text-gray-600 text-sm">All documents in one PDF file</p></div></label>
+                    </div>
+                    <div class="error-message" id="upload_type-error"></div>
+                </div>
+                <div id="separate-upload-section" class="transition-height">
+                    <div class="error-message mb-4" id="separate-docs-error"></div>
+                    <div class="space-y-4 scrollable-section">
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg"><div class="flex items-center"><i class="fas fa-id-card text-blue-500 mr-3"></i><div><span class="font-medium text-gray-700">Aadhaar Card</span><p class="text-gray-500 text-sm">Attach a scanned copy</p></div></div><label class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg cursor-pointer transition-colors"><i class="fas fa-upload mr-2"></i>Upload<input type="file" class="hidden separate-file-input" data-doc="aadhaar" accept=".pdf,.jpg,.jpeg,.png"></label></div>
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg"><div class="flex items-center"><i class="fas fa-user-circle text-blue-500 mr-3"></i><div><span class="font-medium text-gray-700">Passport Size Photograph</span><p class="text-gray-500 text-sm">Provide a recent photo</p></div></div><label class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg cursor-pointer transition-colors"><i class="fas fa-upload mr-2"></i>Upload<input type="file" class="hidden separate-file-input" data-doc="photo" accept=".jpg,.jpeg,.png"></label></div>
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg"><div class="flex items-center"><i class="fas fa-signature text-blue-500 mr-3"></i><div><span class="font-medium text-gray-700">Signature</span><p class="text-gray-500 text-sm">Upload an image</p></div></div><label class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg cursor-pointer transition-colors"><i class="fas fa-upload mr-2"></i>Upload<input type="file" class="hidden separate-file-input" data-doc="signature" accept=".jpg,.jpeg,.png,.pdf"></label></div>
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg"><div class="flex items-center"><i class="fas fa-graduation-cap text-blue-500 mr-3"></i><div><span class="font-medium text-gray-700">Class 10th Marksheet</span><p class="text-gray-500 text-sm">Include your marksheet</p></div></div><label class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg cursor-pointer transition-colors"><i class="fas fa-upload mr-2"></i>Upload<input type="file" class="hidden separate-file-input" data-doc="marksheet" accept=".pdf,.jpg,.jpeg,.png"></label></div>
+                        <div class="flex items-center justify-between p-4 border border-gray-200 rounded-lg"><div class="flex items-center"><i class="fas fa-tint text-blue-500 mr-3"></i><div><span class="font-medium text-gray-700">Blood Group Certificate</span><p class="text-gray-500 text-sm">Attach your certificate</p></div></div><label class="bg-blue-50 hover:bg-blue-100 text-blue-600 px-4 py-2 rounded-lg cursor-pointer transition-colors"><i class="fas fa-upload mr-2"></i>Upload<input type="file" class="hidden separate-file-input" data-doc="blood-group" accept=".pdf,.jpg,.jpeg,.png"></label></div>
+                    </div>
+                </div>
+                <div id="combined-upload-section" class="transition-height">
+                    <div class="mb-4"><p class="text-gray-600 mb-4">Upload one PDF file containing all required documents:</p><ul class="document-list text-gray-600 space-y-1 text-sm mb-4"><li>Aadhaar Card</li><li>Passport Size Photograph</li><li>Signature</li><li>Class 10th Marksheet</li><li>Blood Group Certificate</li></ul></div>
+                    <div class="error-message mb-4" id="combined-doc-error"></div>
+                    <div id="combined-upload-area" class="file-upload-area rounded-lg p-6 text-center"><i class="fas fa-file-pdf text-4xl text-blue-400 mb-3"></i><label for="combined-file-upload" class="block"><span class="text-blue-600 font-medium hover:text-blue-700 cursor-pointer text-lg">Choose PDF file to upload</span><p class="text-gray-500 text-sm mt-1">or drag and drop PDF file here</p></label><input id="combined-file-upload" type="file" name="combined_document" class="hidden" accept=".pdf"></div>
+                </div>
+                <div id="file-status" class="file-status" style="display: none;"><div class="flex items-center"><i id="status-icon" class="mr-2"></i><span id="status-text"></span></div></div>
+            </div>
+
+            <div class="bg-white rounded-xl p-6 shadow-sm border border-blue-100">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4 flex items-center"><i class="fas fa-credit-card text-blue-500 mr-2"></i>Payment Details</h2>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-3">Payment Mode:</label>
+                    <div class="flex gap-6"><label class="inline-flex items-center cursor-pointer"><input type="radio" class="radio-custom w-4 h-4" name="payment_mode" value="online" required><span class="ml-2 text-gray-700 font-medium">Online Payment</span></label><label class="inline-flex items-center cursor-pointer"><input type="radio" class="radio-custom w-4 h-4" name="payment_mode" value="offline"><span class="ml-2 text-gray-700 font-medium">Offline Payment</span></label></div>
+                    <div class="error-message" id="payment_mode-error"></div>
+                </div>
+                <div id="online-payment-section" class="transition-height"><div class="section-divider"></div><label class="block text-sm font-medium text-gray-700 mb-3">Payment Screenshot:</label><div class="file-upload-area rounded-lg p-4 text-center"><i class="fas fa-image text-2xl text-blue-400 mb-2"></i><label for="payment-screenshot" class="block"><span class="text-blue-600 font-medium hover:text-blue-700 cursor-pointer">Upload payment screenshot</span></label><input id="payment-screenshot" type="file" name="payment_screenshot" class="hidden" accept=".jpg,.jpeg,.png,.pdf"></div><div class="error-message" id="payment-screenshot-error"></div></div>
+            </div>
+
+            <div class="text-center"><button type="submit" class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold py-4 px-12 rounded-xl button-transition shadow-lg"><i class="fas fa-upload mr-2"></i>Submit Application</button></div>
+            <p class="copyright">© 2025 Developed by Devanshu Kumar. All rights reserved.</p>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
