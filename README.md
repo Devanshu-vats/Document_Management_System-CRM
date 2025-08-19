@@ -1,6 +1,6 @@
 Document Management System
 
-A comprehensive, client-side document submission portal and admin dashboard built with modern HTML, Tailwind CSS, and JavaScript. This project provides a seamless workflow for users to submit applications and for administrators to manage, review, and export submission data.
+A comprehensive, client-side document submission portal and admin dashboard built with modern HTML, Tailwind CSS, and vanilla JavaScript. This project provides a seamless workflow for users to submit applications and for administrators to manage, review, and export submission data in a responsive, single-page application.
 
 Live Demo Links 🚀
 Admin Dashboard: [Link to Deployed Admin Dashboard will be updated]
@@ -9,21 +9,33 @@ Submission Portal: [Link to Deployed Submission Portal will be updated]
 
 Features ✨
 Admin Dashboard
-📊 Statistical Overview: At-a-glance view of key metrics like total submissions, completed applications, and payment types.
+📊 Statistical Overview: At-a-glance view of key metrics like Total Submissions, Approved Submissions, Online/Offline Payments, and Total Documents.
 
-🔍 Advanced Filtering & Search: Dynamically search by applicant details and filter submissions by multiple criteria (e.g., Completed, Pending, Payment Mode).
+🔍 Advanced Filtering & Search:
 
-📄 Pagination: Efficiently navigate through large datasets with clean pagination controls.
+Instantly search for applicants by name or email.
 
-✅ Manual Verification Workflow: Review applicant details and manually verify payments with a simple toggle, updating the status from "Pending" to "Completed."
+Filter submissions by status: All, Pending Review, Action Required, In Progress, Approved, or Rejected.
 
-💀 Skeleton Loading: An improved user experience with skeleton loaders that appear while data is being fetched.
+📄 Detailed Application View: A comprehensive modal provides a complete overview of each applicant, including:
+
+Personal information (Name, Email, Phone, Gender).
+
+A full list of all submitted documents with individual download links.
+
+✅ Interactive Status Management: Directly update an application's status from a dropdown within the modal view. The change is instantly reflected in the dashboard.
+
+📝 Notes & Activity Log: Administrators can add, view, and delete time-stamped notes for each applicant, creating a clear activity log.
+
+💀 Skeleton Loading: An improved user experience with skeleton loaders that appear while initial data is being fetched.
 
 📥 ZIP Export:
 
-Export all currently filtered user data into a structured ZIP file.
+Export all documents and a summary for a single user into a .zip archive directly from the details view.
 
-Download a ZIP archive for a single user directly from the details view.
+Generate a .zip archive containing data for all currently filtered users.
+
+- Pagination: Efficiently navigate through large datasets with clean pagination controls.
 
 User Submission Portal
 📝 Multi-Step Form: An intuitive form for submitting personal information and documents.
@@ -43,62 +55,40 @@ Styling: Tailwind CSS
 
 Icons: Font Awesome
 
-ZIP Generation: JSZip
+ZIP Generation: Custom Vanilla JS implementation (no external libraries)
 
 File Structure 📂
-The project is organized into two main parts: the admin dashboard and the user portal.
+The project is organized into two main parts: the admin dashboard and the user portal. The files for the admin dashboard are structured as follows:
 
-/Document_Management_System/
-├── 📂 admin/
-│   ├── 📄 index.html         # The main dashboard page
-│   ├── 📄 style.css          # All styles for the dashboard
-│   └── 📄 script.js         # All logic for the dashboard
-│
-├── 📂 portal/
-    ├── 📄 index.html         # The main submission portal page
-    ├── 📄 style.css          # All styles for the portal
-    └── 📄 script.js         # All logic for the portal
-
-
+/
+├── 📄 index.html      # The main dashboard page
+├── 📄 style.css       # All styles for the dashboard
+└── 📄 script.js      # All logic for the dashboard
 Setup and Installation ⚙️
-
-To run this project locally, you need a local server to handle the file requests for the JSZip library. The easiest way is to use the Live Server extension in Visual Studio Code.
+This project uses pure, client-side JavaScript with no external dependencies, so no special build tools or servers are required.
 
 Clone the repository:
 
-git clone https://github.com/your-username/document-management-system.git
+Bash
 
+git clone https://github.com/your-username/document-management-system.git
 Navigate to the project directory:
 
+Bash
+
 cd document-management-system
+Run the application:
 
-Install Live Server (if you haven't already):
+Simply open the index.html file in your web browser.
 
-Open Visual Studio Code.
-
-Go to the Extensions view (Ctrl+Shift+X).
-
-Search for "Live Server" and install it.
-
-Run the Admin Dashboard:
-
-Right-click on the admin/index.html file.
-
-Select "Open with Live Server."
-
-Run the Submission Portal:
-
-Right-click on the portal/index.html file.
-
-Select "Open with Live Server."
+Alternatively, for development, you can use an extension like Live Server in Visual Studio Code.
 
 Screenshots 📸
-[Screenshot of the Admin Dashboard] 
+[Screenshot of the Admin Dashboard]
 <img width="1040" height="860" alt="image" src="https://github.com/user-attachments/assets/a2880a56-901f-4074-8b67-93aad9c2b7bd" />
 
 [Screenshot of the Submission Portal]
 <img width="798" height="923" alt="image" src="https://github.com/user-attachments/assets/806103fd-4328-4255-8561-b7e70e72aa8a" />
-
 
 Author ✍️
 Devanshu Kumar
@@ -109,3 +99,4 @@ LinkedIn: [www.linkedin.com/in/devanshu-kumar-7a146b246]
 
 License 📄
 This project is licensed under the MIT License. See the LICENSE file for details.
+
